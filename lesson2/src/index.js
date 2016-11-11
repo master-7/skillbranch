@@ -2,6 +2,7 @@ import express from 'express';
 
 var app = express();
 
+//Task 1
 var parseDigitParam = param => {
   let digit = parseInt(param);
   return digit ? digit : 0;
@@ -16,6 +17,7 @@ app.get('/', function (req, res) {
   res.send("Result: " + result);
 });
 
+//Task 2
 var fullnameFormater = result => {
   var checkName = name => {
     return name[0] ? name[0] + "." : "";
@@ -44,6 +46,17 @@ app.get('/name', function (req, res) {
     res.status(200);
     res.send(fullnameFormater(result));
   }
+});
+
+//Task 3
+
+app.get('/username', function (req, res) {
+  const username = req.query.username;
+
+  const regExp = /(https?:)?(\/\/)?(\w+\.\w+)?(\/)?([\w\.\-]+)/gi;
+
+  res.status(200);
+  res.send(`\@${regExp.exec(username)[5]}`);
 });
 
 app.listen(3000, function () {
